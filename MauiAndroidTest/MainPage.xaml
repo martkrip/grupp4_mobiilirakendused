@@ -31,6 +31,22 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
+
+            <VerticalStackLayout Spacing="15" Padding="20">
+                <Entry x:Name="TextBox"
+                   Placeholder="Sisesta tekst"
+                   BackgroundColor="#FF09AF3B"
+                   TextColor="White"
+                   Keyboard="Text"
+                   HorizontalOptions="Fill"/>
+                <Button Text="Submit"
+                    Clicked="OnSubmitClicked"/>
+                <VerticalStackLayout x:Name="TextListContainer"
+                                     Spacing="5">
+                    
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
         </VerticalStackLayout>
     </ScrollView>
 

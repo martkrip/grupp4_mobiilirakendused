@@ -20,4 +20,22 @@ public partial class MainPage : ContentPage
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 	}
+	
+	private void OnSubmitClicked(object sender, EventArgs e)
+	{
+		string userText = TextBox.Text;
+		if (string.IsNullOrWhiteSpace(userText))
+			return;
+
+		var NewLabel = new Label
+		{
+			Text = userText,
+			FontSize = 16,
+			Margin = new Thickness(0, 5)
+		};
+
+        TextListContainer.Children.Add(NewLabel);
+		TextBox.Text = string.Empty;
+	}
+
 }
