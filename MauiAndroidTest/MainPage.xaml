@@ -36,10 +36,11 @@
                 <Entry x:Name="TextBox"
                    Placeholder="Sisesta tekst"
                    BackgroundColor="#FF09AF3B"
-                   TextColor="White"
+                   TextColor="Black"
                    Keyboard="Text"
                    HorizontalOptions="Fill"/>
                 <Button Text="Submit"
+                    BackgroundColor="#FF09AF3B"
                     Clicked="OnSubmitClicked"/>
                 <Label
                     x:Name="EntryCountLabel"
