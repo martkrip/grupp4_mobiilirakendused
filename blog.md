@@ -2,7 +2,8 @@ Esimene ülesanne:
 
 Ei tekkinud suuri probleeme vajalike asjade laadimise ja installimisega, nt .NET Maui, Android Studio jne.
 Luues Maui malli ja selle githubi üles laadides tundus olukord hea.
-Suur probleem esines emulaatori tööle saamisega, (Oskaril) ei läinud Windows Hypervisor Platform käima, peale mitut korda arvuti taaskäivitamist.
+Suur probleem esines emulaatori tööle saamisega, (Oskaril) ei läinud Windows Hypervisor Platform käima, peale mitut korda arvuti taaskäivitamist. Lahenduseks oli BIOS-s CPU virtualisatsiooni käivitamine.
+Oskaril oli probleem ka koodi käivitamisega Virtual Studios, probleem oli lihtsalt vale JDK versiooniga ja teiste failidega.
 
 Debuggeri käivitamisega oli väga lihtne, lihtsalt pidi eelnevalt seadme valima, panna programmi sinna ja siis debuggerit käivitada Visual Studios.
 
