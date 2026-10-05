@@ -18,4 +18,4 @@ Martin Toomas githubi loomisega, emulaatori üles panemisega, seadistamise juhis
 Oskar malli loomise, 1% muudatusega ja blogi kirjutamisega.
 Jonas debuggeri füüsilise käivitamisega
 Juhan malli täiendamisega
-Dylan malli täiendamisega
+Dylan malli täiendamisega, testimisega ja dokumentatsiooni kirjutamisega.
