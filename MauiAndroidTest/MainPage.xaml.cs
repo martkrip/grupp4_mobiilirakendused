@@ -3,8 +3,9 @@
 public partial class MainPage : ContentPage
 {
 	int count = 0;
+    int entryCount = 0;
 
-	public MainPage()
+    public MainPage()
 	{
 		InitializeComponent();
 	}
@@ -29,13 +30,17 @@ public partial class MainPage : ContentPage
 
 		var NewLabel = new Label
 		{
-			Text = userText,
+			Text = $"{DateTime.Now:HH:mm} - {userText}",
 			FontSize = 16,
 			Margin = new Thickness(0, 5)
 		};
 
         TextListContainer.Children.Add(NewLabel);
-		TextBox.Text = string.Empty;
+
+        entryCount++;
+        EntryCountLabel.Text = $"Entries: {entryCount}";
+
+        TextBox.Text = string.Empty;
 	}
 
 }

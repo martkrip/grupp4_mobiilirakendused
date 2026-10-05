@@ -41,6 +41,11 @@
                    HorizontalOptions="Fill"/>
                 <Button Text="Submit"
                     Clicked="OnSubmitClicked"/>
+                <Label
+                    x:Name="EntryCountLabel"
+                    Text="Entries: 0"
+                    FontSize="18"
+                    HorizontalOptions="Center" />
                 <VerticalStackLayout x:Name="TextListContainer"
                                      Spacing="5">
                     
