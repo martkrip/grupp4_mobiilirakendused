@@ -14,7 +14,7 @@ Martin Toomas sai emulaatori (Visual Studios) tööle, kuid malliga oli probleem
 
 Siiamaani on panustanud:
 Martin Toomas githubi loomisega, emulaatori üles panemisega, seadistamise juhise kirjutamisega, blogi täiendamisega.
-Oskar malli loomise ja blogi kirjutamisega
+Oskar malli loomise, 1% muudatusega ja blogi kirjutamisega.
 Jonas debuggeri füüsilise käivitamisega
 Juhan malli täiendamisega
 Dylan malli täiendamisega
