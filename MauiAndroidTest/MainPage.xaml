@@ -49,7 +49,7 @@
                     HorizontalOptions="Center" />
                 <VerticalStackLayout x:Name="TextListContainer"
                                      Spacing="5">
-                    
+
                 </VerticalStackLayout>
             </VerticalStackLayout>
 
