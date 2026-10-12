@@ -19,3 +19,21 @@ Oskar malli loomise, 1% muudatusega ja blogi kirjutamisega.
 Jonas debuggeri füüsilise käivitamisega
 Juhan malli täiendamisega
 Dylan malli täiendamisega, testimisega ja dokumentatsiooni kirjutamisega.
+
+
+
+
+Kolmas ülesanne:
+
+Alustasin erinevate navigeerimismeetodite ülevaatega ning otsustasin kasutada tab-navigatsiooni, kuna see tundus kõige lihtsam nii kasutaja kui ka implementatsiooni seisukohalt.
+Esimese sammuna lisasin rakendusse kaks uut lehte: SecondPage ja ThirdPage. Seejärel lisasin AppShell-i alumise tab-navigatsiooni ning sidusin sinna kõik kolm peamist lehte. .NET MAUI teeb sellise navigeerimise lihtsaks, kuna põhiline navigeerimisstruktuur on võimalik kirjeldada otse AppShell.xaml failis.
+
+Rakenduse peamised lehed on defineeritud AppShell.xaml failis ShellContent elementidena, mis moodustavad alumise tab-navigatsiooni. Alamlehti ei lisata otse navigeerimisribale, vaid need registreeritakse marsruutidena ning avatakse GoToAsync() meetodiga.
+
+Järgmisena lisasin kolmanda lehe alla sügavamad alamlehed (3.1 ja 3.2). Nendele navigeerimiseks kasutasin Shell.Current.GoToAsync() meetodit koos vastava lehekülje marsruudiga. Kuna navigeerimine on asünkroonne tegevus, kasutasin async ja await, et rakenduse kasutajaliides ei hanguks lehtede vahetamise ajal.
+
+Sügavamatele lehtedele navigeerides jäävad need vastava tab-i navigeerimisstacki alles. See tähendab, et kui kasutaja liigub näiteks lehelt 3 alamlehele 3.1, seejärel vahetab tab-i ja hiljem naaseb kolmandale tab-ile, võib MAUI kuvada uuesti lehe 3.1, mitte peamist lehte 3. Selle käitumise muutmiseks lisasin OnNavigated meetodisse kontrolli, mis tuvastab peamiste tab-ide vahel liikumise. Tab-i vahetamisel kutsutakse välja PopToRootAsync(), mis eemaldab vastava tab-i stackist sügavamad lehed ning taastab algse peamise lehe.
+
+Mitmelehelise lahenduse ja tab-navigatsiooni implementeerimine osutus .NET MAUI-s üsna lihtsaks. Kõige rohkem tähelepanu võttis alamlehtede navigeerimisstacki käitumise mõistmine, kuna MAUI säilitab iga tab-i navigeerimisajaloo eraldi. Pärast stacki tööpõhimõtte mõistmist oli võimalik soovitud käitumine suhteliselt vähese lisakoodiga tekitada.
+
+Panustas Quentin
