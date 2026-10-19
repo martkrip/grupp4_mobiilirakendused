@@ -23,7 +23,7 @@
 
         <ShellContent
             Title="Leht 3"
-            ContentTemplate="{DataTemplate local:ThirdPage}"
+            ContentTemplate="{DataTemplate local:SensorsPage}"
             Route="ThirdPage" />
 
     </TabBar>

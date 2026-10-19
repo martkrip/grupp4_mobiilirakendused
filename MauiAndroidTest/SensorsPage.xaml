@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiAndroidTest.ThirdPage"
-             Title="ThirdPage">
+             x:Class="MauiAndroidTest.SensorsPage"
+             Title="Sensors Page">
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
             <Label
-                Text="Page 3"
+                Text="Sensorid"
                 FontSize="24" />
 
             <Button
-                Text="Open 3.1"
-                Clicked="OpenThirdOne" />
+                Text="Ava kaamera lehekülg"
+                Clicked="OpenCameraPage" />
 
             <Button
                 Text="Open 3.2"

@@ -6,8 +6,7 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
 
-        //Navbar navigatsioon
-        Routing.RegisterRoute(nameof(ThirdOnePage), typeof(ThirdOnePage));
+        Routing.RegisterRoute(nameof(CameraPage), typeof(CameraPage));
         Routing.RegisterRoute(nameof(ThirdTwoPage), typeof(ThirdTwoPage));
     }
 

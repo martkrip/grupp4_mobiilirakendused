@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiAndroidTest.ThirdOnePage"
-             Title="ThirdOnePage">
+             x:Class="MauiAndroidTest.CameraPage"
+             Title="Camera Page">
     <VerticalStackLayout>
         <Label 
-            Text="Page 3.1"
+            Text="Kaamera sensor"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Button
+            Text="Ava kaamera"
+            Clicked="OpenCameraClicked" />
+        <Image
+            x:Name="CapturedImage"
+            HeightRequest="300"
+            Aspect="AspectFit" />
     </VerticalStackLayout>
 </ContentPage>

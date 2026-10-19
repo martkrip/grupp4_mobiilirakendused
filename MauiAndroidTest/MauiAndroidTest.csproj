@@ -71,13 +71,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="SensorsPage.xaml.cs">
+	    <DependentUpon>SensorsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="CameraPage.xaml.cs">
+	    <DependentUpon>CameraPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="SecondPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ThirdOnePage.xaml">
+	  <MauiXaml Update="CameraPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ThirdPage.xaml">
+	  <MauiXaml Update="SensorsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="ThirdTwoPage.xaml">
