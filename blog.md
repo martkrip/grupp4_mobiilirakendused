@@ -37,3 +37,21 @@ Sügavamatele lehtedele navigeerides jäävad need vastava tab-i navigeerimissta
 Mitmelehelise lahenduse ja tab-navigatsiooni implementeerimine osutus .NET MAUI-s üsna lihtsaks. Kõige rohkem tähelepanu võttis alamlehtede navigeerimisstacki käitumise mõistmine, kuna MAUI säilitab iga tab-i navigeerimisajaloo eraldi. Pärast stacki tööpõhimõtte mõistmist oli võimalik soovitud käitumine suhteliselt vähese lisakoodiga tekitada.
 
 Panustas Quentin
+
+
+
+
+Neljas ülesanne- sensorite kasutamine:
+
+Esiteks muutsin AndroidManifest.xml faili, et deklareerida soov kasutada kaamerat. Androidis on see vajalik enne, kui rakendus saab kasutajalt kaamera kasutamiseks permissionit küsida.
+Seejärel lisasin helperi sensorite (ja muude õiguste) kontrollimiseks ning küsimiseks. Helper kontrollib esmalt, kas vastav permission on juba antud, ning vajadusel küsib kasutajalt ligipääsu. Seda lahendust saab hiljem kasutada ka näiteks mikrofoni või asukoha puhul.
+Lehele 3.1 lisasin nupu, mille vajutamisel kontrollitakse kaamera permissionit, vajadusel küsitakse seda ning avatakse seadme kaamera. Pärast pildi tegemist tagastab MediaPicker pildi failiviitena. Pilt kopeeritakse rakenduse cache-kausta, mille järel kuvatakse see ajutiselt lehel.
+Lahendust testisin füüsilisel Android-seadmel.
+
+Permissionite küsimine ei olnud keeruline, kuna selleks on olemas Permissions API. Microsofti dokumentatsioon:
+https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/appmodel/permissions?view=net-maui-10.0&tabs=windows
+
+Kaamera kasutamine oli samuti lihtne tänu MediaPicker API-le. Microsofti dokumentatsioon:
+https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device-media/picker?view=net-maui-10.0&tabs=windows
+
+Panustas Quentin
