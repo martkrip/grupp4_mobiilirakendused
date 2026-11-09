@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MauiAndroidTest.ARPage"
+    Title="AR Designer"
+    BackgroundColor="#202A35">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <Grid Grid.Row="0"
+              BackgroundColor="#34495E">
+
+            <Label Text="AR CAMERA"
+                   TextColor="White"
+                   FontSize="26"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+            <Label Text="Move your phone to scan the floor"
+                   TextColor="White"
+                   VerticalOptions="End"
+                   HorizontalOptions="Center"
+                   Margin="10,10,10,25"/>
+        </Grid>
+
+        <VerticalStackLayout
+            Grid.Row="1"
+            Padding="15"
+            Spacing="12">
+
+            <Label Text="Choose furniture"
+                   TextColor="White"
+                   FontSize="20"
+                   FontAttributes="Bold"/>
+
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="10">
+
+                <Button Text="Chair"
+                        Clicked="ChairClicked"/>
+
+                <Button Text="Table"
+                        Clicked="TableClicked"/>
+
+                <Button Text="Lamp"
+                        Clicked="LampClicked"/>
+            </HorizontalStackLayout>
+
+            <Button Text="Place Object"
+                    BackgroundColor="#3478D4"
+                    TextColor="White"
+                    Clicked="PlaceClicked"/>
+
+            <Button Text="Remove Object"
+                    Clicked="RemoveClicked"/>
+
+            <Label x:Name="StatusLabel"
+                   Text="Ready to start AR"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>
