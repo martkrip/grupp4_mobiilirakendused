@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="arcore">
+    <CLASSES>
+      <root url="file:///tmp/JetBrains/xamarinAarPackages/arcore/classes.jar" />
+      <root url="file:///tmp/JetBrains/xamarinAarPackages/arcore/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -55,3 +55,16 @@ Kaamera kasutamine oli samuti lihtne tänu MediaPicker API-le. Microsofti dokume
 https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device-media/picker?view=net-maui-10.0&tabs=windows
 
 Panustas Quentin
+
+Viies Ülesanne - Augmenteeritud reaalsus.
+
+AR veel ei tööta. Kasutame ARCORE'i.
+
+Kuues ülesanne - Andmete hoidmine ja ligipääs
+
+Sätette leht salvestab sätette seisud ja teksti- ja pildifailid lokaalselt app data'sse, nii, et need on olemas ka peale rakenduse sulgemist. Lehel on kolm osa: oma sätted, tekstifaili lahter ja foto lahter. Sätted salvestatakse läbi Preferences API. Teksti- ja pildifailid salvestatakse FileSystem.AppDataDirectory alla. Pilt saab unikaalse nime kuupäevaga. Foto tegemiseks kasutasime nagu varem MediaPicker'it.
+Lehe uuesti avamisel loeme andmed läbi OnAppearing'u. 
+Leht toetab praegu ainult ühe samanimelist "note.txt" tekstifaili salvestamist ja vaatamist. Ja näitab ainult viimati tehtud pilti.
+Lehele saab liikuda läbi "sensors" lehekülje.
+
+Preferences ja AppDataDirectory kasutamine ei esitanud raskusi.
