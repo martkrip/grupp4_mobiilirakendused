@@ -19,7 +19,10 @@
                 Text="Ava Sättete lehekülg"
                 Clicked="OpenSettingsPage" />
 
-
+            <Button
+                Text="Ava AR lehekülg"
+                Clicked="OnARClicked"/>
+            
             <Button
                 Text="Open 3.2"
                 Clicked="OpenThirdTwo" />

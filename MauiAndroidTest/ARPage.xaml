@@ -3,10 +3,10 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="MauiAndroidTest.ARPage"
-    Title="AR Designer"
-    BackgroundColor="#202A35">
+    Title="AR lehekülg">
 
-    <Grid RowDefinitions="*,Auto">
+    <Grid RowDefinitions="*,Auto"
+          BackgroundColor="#202A35">
 
         <Grid Grid.Row="0"
               BackgroundColor="#34495E">
@@ -17,20 +17,20 @@
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
 
-            <Label Text="Move your phone to scan the floor"
+            <Label Text="Scan the floor to detect a surface"
                    TextColor="White"
-                   VerticalOptions="End"
                    HorizontalOptions="Center"
-                   Margin="10,10,10,25"/>
+                   VerticalOptions="End"
+                   Margin="10,10,10,30"/>
+
         </Grid>
 
-        <VerticalStackLayout
-            Grid.Row="1"
-            Padding="15"
-            Spacing="12">
+        <!-- AR controls -->
+        <VerticalStackLayout Grid.Row="1"
+                             Padding="20"
+                             Spacing="12">
 
             <Label Text="Choose furniture"
-                   TextColor="White"
                    FontSize="20"
                    FontAttributes="Bold"/>
 
@@ -46,6 +46,7 @@
 
                 <Button Text="Lamp"
                         Clicked="LampClicked"/>
+
             </HorizontalStackLayout>
 
             <Button Text="Place Object"
@@ -57,11 +58,11 @@
                     Clicked="RemoveClicked"/>
 
             <Label x:Name="StatusLabel"
-                   Text="Ready to start AR"
-                   TextColor="White"
+                   Text="AR ready"
                    HorizontalOptions="Center"/>
 
         </VerticalStackLayout>
 
     </Grid>
 </ContentPage>
+

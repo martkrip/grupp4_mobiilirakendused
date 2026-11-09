@@ -23,5 +23,10 @@ public partial class SensorsPage : ContentPage
         await Shell.Current.GoToAsync(nameof(SettingsPage));
     }
 
+    private async void OnARClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ARPage());
+    }
+
 
 }
