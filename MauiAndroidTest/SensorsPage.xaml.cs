@@ -16,5 +16,12 @@ public partial class SensorsPage : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(ThirdTwoPage));
     }
+    
+    
+    private async void OpenSettingsPage(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(SettingsPage));
+    }
+
 
 }

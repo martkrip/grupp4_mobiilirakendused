@@ -8,6 +8,7 @@ public partial class AppShell : Shell
 
         Routing.RegisterRoute(nameof(CameraPage), typeof(CameraPage));
         Routing.RegisterRoute(nameof(ThirdTwoPage), typeof(ThirdTwoPage));
+        Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
     }
 
     protected override async void OnNavigated(ShellNavigatedEventArgs args) //Kui navigeerida 3.1 ja alumiselt navbarilt liigutakse uuesti lehtede vahel, tuleks tagasi esimese taseme leht mitte teise taseme leht (3.1 v 3.2 asemel 3)

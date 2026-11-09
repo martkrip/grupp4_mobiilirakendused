@@ -14,6 +14,11 @@
             <Button
                 Text="Ava kaamera lehekülg"
                 Clicked="OpenCameraPage" />
+            
+            <Button
+                Text="Ava Sättete lehekülg"
+                Clicked="OpenSettingsPage" />
+
 
             <Button
                 Text="Open 3.2"

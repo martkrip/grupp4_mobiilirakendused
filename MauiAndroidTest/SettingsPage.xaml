@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAndroidTest.SettingsPage"
+             Title="Sätted ja salvestus">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+
+            <Label Text="Personaalsed sätted" FontSize="22" FontAttributes="Bold" />
+
+            <Entry x:Name="NameEntry" Placeholder="Sinu nimi" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Tume teema" VerticalOptions="Center" />
+                <Switch x:Name="DarkSwitch" Toggled="OnDarkToggled" />
+            </HorizontalStackLayout>
+
+            <Label x:Name="FontLabel" Text="Teksti suurus: 16" />
+            <Slider x:Name="FontSlider"
+                    Minimum="12" Maximum="30" Value="16"
+                    ValueChanged="OnFontChanged" />
+
+            <Button Text="Salvesta sätted" Clicked="OnSaveSettingsClicked" />
+
+            <BoxView HeightRequest="1" Color="Gray" Margin="0,8" />
+
+            <Label Text="Minu märkmed (tekstifail)" FontSize="22" FontAttributes="Bold" />
+
+            <Editor x:Name="NoteEditor"
+                    Placeholder="Kirjuta siia..."
+                    HeightRequest="140"
+                    AutoSize="Disabled" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Salvesta fail" Clicked="OnSaveNoteClicked" />
+                <Button Text="Jaga / ekspordi" Clicked="OnShareNoteClicked" />
+            </HorizontalStackLayout>
+
+            <BoxView HeightRequest="1" Color="Gray" Margin="0,8" />
+
+            <Label Text="Foto" FontSize="22" FontAttributes="Bold" />
+
+            <Image x:Name="PhotoImage"
+                   HeightRequest="240"
+                   Aspect="AspectFit" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Tee foto" Clicked="OnTakePhotoClicked" />
+                <Button Text="Jaga / ekspordi" Clicked="OnSharePhotoClicked" />
+            </HorizontalStackLayout>
+
+            <Label x:Name="StatusLabel" FontSize="13" TextColor="Gray" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
