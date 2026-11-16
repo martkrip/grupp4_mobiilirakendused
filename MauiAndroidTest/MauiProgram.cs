@@ -15,6 +15,13 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
+#if ANDROID
+        builder.ConfigureMauiHandlers(handlers =>
+        {
+            handlers.AddHandler<ARCoreMauiView, ARCoreMauiViewHandler>();
+        });
+#endif
+
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif

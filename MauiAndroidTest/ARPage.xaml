@@ -8,20 +8,28 @@
     <Grid RowDefinitions="*,Auto"
           BackgroundColor="#202A35">
 
+        <!-- AR View Container / Placeholder for Android ARCore Fragment Handler -->
         <Grid Grid.Row="0"
               BackgroundColor="#34495E">
+
+            <ContentView x:Name="ARContainer"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Fill"/>
 
             <Label Text="AR CAMERA"
                    TextColor="White"
                    FontSize="26"
                    HorizontalOptions="Center"
-                   VerticalOptions="Center"/>
+                   VerticalOptions="Center"
+                   InputTransparent="True"/>
 
-            <Label Text="Scan the floor to detect a surface"
+            <Label x:Name="InstructionLabel"
+                   Text="Scan the floor to detect a surface"
                    TextColor="White"
                    HorizontalOptions="Center"
                    VerticalOptions="End"
-                   Margin="10,10,10,30"/>
+                   Margin="10,10,10,30"
+                   InputTransparent="True"/>
 
         </Grid>
 
@@ -32,7 +40,8 @@
 
             <Label Text="Choose furniture"
                    FontSize="20"
-                   FontAttributes="Bold"/>
+                   FontAttributes="Bold"
+                   TextColor="White"/>
 
             <HorizontalStackLayout
                 HorizontalOptions="Center"
@@ -55,14 +64,16 @@
                     Clicked="PlaceClicked"/>
 
             <Button Text="Remove Object"
+                    BackgroundColor="#D9534F"
+                    TextColor="White"
                     Clicked="RemoveClicked"/>
 
             <Label x:Name="StatusLabel"
-                   Text="AR ready"
-                   HorizontalOptions="Center"/>
+                   Text="AR ready - Tap place to anchor object"
+                   HorizontalOptions="Center"
+                   TextColor="White"/>
 
         </VerticalStackLayout>
 
     </Grid>
 </ContentPage>
-
