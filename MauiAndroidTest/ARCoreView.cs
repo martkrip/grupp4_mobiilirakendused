@@ -3,15 +3,16 @@ using System;
 using System.Collections.Generic;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.Opengl;
 using Android.Views;
+using Javax.Microedition.Khronos.Egl;
+using Javax.Microedition.Khronos.Opengles;
 using Google.AR.Core;
 using Google.AR.Core.Exceptions;
 using Java.Nio;
 using Microsoft.Maui.ApplicationModel;
 using AColor = Android.Graphics.Color;
-using Javax.Microedition.Khronos.Egl;
-using Javax.Microedition.Khronos.Opengles;
 
 namespace MauiAndroidTest;
 
@@ -125,20 +126,30 @@ public sealed class ARCoreView : GLSurfaceView
         Report("Objekt eemaldatud.");
     }
 
-    private Session CreateSession()
-{
-    var session = new Session(Platform.AppContext);
+    private void CreateSession()
+    {
+        session = new Session(Platform.AppContext);
 
-    var config = new Config(session);
-    session.GetConfig(config);
+        var config = new Google.AR.Core.Config(session);
 
-    config.SetPlaneFindingMode(
-        Config.PlaneFindingMode.HorizontalAndVertical);
+        session.GetConfig(config);
 
-    session.Configure(config);
+        config.SetPlaneFindingMode(
+            Google.AR.Core.Config.PlaneFindingMode.HorizontalAndVertical);
 
-    return session;
-}
+        config.SetLightEstimationMode(
+            Google.AR.Core.Config.LightEstimationMode.AmbientIntensity);
+
+        // Kontrollime, kas seade toetab Depth API-t.
+        var depthMode = Google.AR.Core.Config.DepthMode.Automatic;
+
+        if (session.IsDepthModeSupported(depthMode))
+        {
+            config.SetDepthMode(depthMode);
+        }
+
+        session.Configure(config);
+    }
 
     private void OnTouch(object? sender, TouchEventArgs e)
     {
@@ -249,7 +260,7 @@ public sealed class ARCoreView : GLSurfaceView
 
             try
             {
-                Session?.SetDisplayGeometry((int)DisplayRotation.Rotation0, width, height);
+                Session.SetDisplayGeometry((int)DisplayRotation.Rotation0, width, height);
             }
             catch
             {
@@ -389,9 +400,7 @@ public sealed class ARCoreView : GLSurfaceView
             camera.GetViewMatrix(viewMatrix, 0);
             camera.GetProjectionMatrix(projectionMatrix, 0, Near, Far);
 
-            Android.Opengl.Matrix.MultiplyMM(
-                modelViewProjection, 0, viewMatrix, 0, modelMatrix, 0);
-
+            Android.Opengl.Matrix.MultiplyMM(modelViewProjection, 0, viewMatrix, 0, modelMatrix, 0);
             Android.Opengl.Matrix.MultiplyMM(
                 modelViewProjection, 0, projectionMatrix, 0, modelViewProjection, 0);
 
@@ -502,42 +511,41 @@ public sealed class ARCoreView : GLSurfaceView
             return buffer;
         }
 
-        private const string CameraVertexShader = @"
-        attribute vec2 aPosition;
-        attribute vec2 aTexCoord;
-        varying vec2 vTexCoord;
+        private const string CameraVertexShader = """
+            attribute vec2 aPosition;
+            attribute vec2 aTexCoord;
+            varying vec2 vTexCoord;
+            void main() {
+                gl_Position = vec4(aPosition, 0.0, 1.0);
+                vTexCoord = aTexCoord;
+            }
+            """;
 
-        void main() {
-            gl_Position = vec4(aPosition, 0.0, 1.0);
-            vTexCoord = aTexCoord;
-        }";
+        private const string CameraFragmentShader = """
+            #extension GL_OES_EGL_image_external : require
+            precision mediump float;
+            varying vec2 vTexCoord;
+            uniform samplerExternalOES uTexture;
+            void main() {
+                gl_FragColor = texture2D(uTexture, vTexCoord);
+            }
+            """;
 
-        private const string CameraFragmentShader =
-        " " +
-        "#extension GL_OES_EGL_image_external : require\n" +
-        "precision mediump float;\n" +
-        "varying vec2 vTexCoord;\n" +
-        "uniform samplerExternalOES uTexture;\n" +
-        "\n" +
-        "void main() {\n" +
-        "    gl_FragColor = texture2D(uTexture, vTexCoord);\n" +
-        "}";
+        private const string CubeVertexShader = """
+            uniform mat4 uMvp;
+            attribute vec3 aPosition;
+            void main() {
+                gl_Position = uMvp * vec4(aPosition, 1.0);
+            }
+            """;
 
-        private const string CubeVertexShader = @"
-        uniform mat4 uMvp;
-        attribute vec3 aPosition;
-
-        void main() {
-            gl_Position = uMvp * vec4(aPosition, 1.0);
-        }";
-
-        private const string CubeFragmentShader =
-        "precision mediump float;\n" +
-        "uniform vec4 uColor;\n" +
-        "\n" +
-        "void main() {\n" +
-        "    gl_FragColor = uColor;\n" +
-        "}";
+        private const string CubeFragmentShader = """
+            precision mediump float;
+            uniform vec4 uColor;
+            void main() {
+                gl_FragColor = uColor;
+            }
+            """;
 
         private static readonly float[] CubeVertices =
         {
