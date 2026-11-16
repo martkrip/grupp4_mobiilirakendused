@@ -58,11 +58,24 @@ Panustas Quentin
 
 Viies Ülesanne - Augmenteeritud reaalsus.
 
-AR veel ei tööta. Kasutame ARCORE'i.
+AR effekti saavutaamiseks kasutame Google ARCore raamistikku. OpenGL ES 2.0'i kaamerapildi ja objekti joonistamise jaoks. MAUI handlerit androidi vaate ühendamiseks MAUI lehega.
+
+ARCore tuvastab pinnad, Kasutaja saab puutuda ekraanile, et lisada ankur. Objekt joonistatakse ankru kohale. Lahendus töötab hetkel ainult androidis ja vajab kaameraluba.
+
+ARPage sisaldab nuppe ja lahenduse elutsükklit.
+
+ARCoreMauiView sisaldab MAUI vaadet.
+
+ARCoreMauiViewHandler loob ja haldab natiivset vaadet
+
+ARCoreView sisaldab ARCore sessiooni, puudutuse töötlust ja mudeli joonistamist.
 
 On VIST välja töötatud AR loogika. Lisasin kaamera, mis hetkel inverted ja AR täielikult ei tööta. Tehtud ümber csproj fail, et oleks vähem konflikte ja ei esineks kordumisi.
 Tegelemine siiamaani väga ebameeldiv, palju erroreid olnud. Kui üks asi ära parandada siis tekib mitu uut errorit juurde.
 Palju probleeme oli ka füüsilisel seadmel rakenduse testimisega, kuna millegi pärast läheb ajaga kõik katki ja peab käsklustega kõik korda tegema, et uuesti testimine võimalik oleks. Vähemalt sai korda ja telefoniga testitud.
+
+Tegelesid Oskar, Dylan ja Juhan
+
 
 Kuues ülesanne - Andmete hoidmine ja ligipääs
 
@@ -72,3 +85,5 @@ Leht toetab praegu ainult ühe samanimelist "note.txt" tekstifaili salvestamist 
 Lehele saab liikuda läbi "sensors" lehekülje.
 
 Preferences ja AppDataDirectory kasutamine ei esitanud raskusi.
+
+Seitsmes Ülesanne - 
