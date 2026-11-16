@@ -86,4 +86,43 @@ Lehele saab liikuda läbi "sensors" lehekülje.
 
 Preferences ja AppDataDirectory kasutamine ei esitanud raskusi.
 
+
+7. ülesanne. Võrgulahendus
+
+REST API ja HTTPS-protokoll. ReqRes
+
+Esialgu katsetasin DummyJSON'i, kuid soovisin ka andmete hoiustamist. Proovisin ASP.NET Core Minimal API ja SQLite abil serveri loomist. Serveri ühendamisel füüsilise Android-seadmega tekkis aga probleeme arenduskeskkonna seadistusega ning oleks ka teistele tekitanud keskkonna seadistamise vajaduse.
+
+Otsustasin kasutada ReqRes, kuna erinevalt tavalisest test-API-st võimaldab see andmeid serverisse püsivalt salvestada.
+
+Lõin ReqRes'is movies collection'i järgmiste väljadega:
+title String
+coverImage String Filmi kaanepildi URL
+releaseDate String (date) Filmi väljalaskekuupäev 
+completed Boolean Kas film on vaadatud
+
+Testisin API tööd PowerShelli kaudu, kasutades GET- ja POST-päringuid. POST-päringuga lisatud andmed jäid serverisse alles ning olid hiljem GET-päringuga kättesaadavad.
+
+Tegin ReqResApiService.cs klassi, mis võimaldab kasutada valmis meetodeid ilma HTTP-päringute koostamise või JSON-andmete töötlemiseta. Lisaks lõin Models kausta Movie.cs faili, milles on kirjeldatud filmi andmemudel ja serveri vastuste struktuur.
+
+API-teenuses kasutasin .NET-i HttpClient klassi, mis võimaldab saata HTTP-päringuid ja vastu võtta serveri vastuseid.
+Kaks peamist meetodit:
+GetMoviesAsync() - Meetod saadab ReqRes serverile GET-päringu, kasutades movies collection'i aadressi. Server tagastab JSON-vormingus andmed, mis teisendatakse ReadFromJsonAsync() abil C# objektideks. Meetod tagastab List<MovieRecord> nimekirja, mis sisaldab filmide ID-sid ja andmeid. Neid saab hiljem kasutada näiteks filmide kuvamiseks.
+
+AddMovieAsync(Movie movie, string manageKey) - Meetod võimaldab lisada serverisse uue filmi. Sisendiks on Movie objekt ja kirjutamisõigusega API võti. Enne saatmist paigutatakse filmi andmed data objekti sisse. JsonContent.Create() teisendab C# objekti JSON-vormingusse. Seejärel saadetakse serverile POST-päring ning vastus teisendatakse tagasi C# objektiks.
+
+Mõlemad meetodid on asünkroonsed, et päringute ajal ei blokeeruks kasutajaliides.
+
+ReqRes kasutab API võtmeid ligipääsu kontrollimiseks. Andmete lugemiseks kasutan avalikku pub_ võtit, mis on lisatud API-teenuse konfiguratsiooni. See võimaldab kasutada GetMoviesAsync() meetodit ilma täiendava seadistamiseta. Andmete lisamiseks on vajalik pro_ haldusvõti. Seda ei ole GitHubis ega rakenduse lähtekoodis, vaid antakse POST-meetodile eraldi argumendina. Post lahendus sobib vaid testimiseks, edaspidi tuleks andmete muutmiseks kasutada turvalisemat autentimist.
+
+Vajadusel saab täiendada PUT-, PATCH- ja DELETE-meetoditega.
+
+Üldiselt oli REST API-ga ühenduse loomine .NET MAUI-s suhteliselt lihtne tänu HttpClient API-le ning JSON-i automaatsele serialiseerimisele ja deserialiseerimisele. Tähelepanu võttis serverilahenduse valimine, ReqRes seadistamine.
+
+Kasutatud dokumentatsioon
+Microsoft – Consume a REST-based web service (.NET MAUI) https://learn.microsoft.com/en-us/dotnet/maui/data-cloud/rest?view=net-maui-10.0
+Microsoft – HttpClient https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/http/http-overview
+ReqRes – API dokumentatsioon https://reqres.in/docs
+
+^Tegi Quentin
 Seitsmes Ülesanne - 
