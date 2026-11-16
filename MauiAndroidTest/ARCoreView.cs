@@ -219,7 +219,36 @@ public sealed class ARCoreView : GLSurfaceView
         private int viewportWidth;
         private int viewportHeight;
 
-        internal Session? Session { get; set; }
+        private Session? session;
+
+        internal Session? Session
+        {
+            get => session;
+            set
+            {
+                session = value;
+
+                // Kui OpenGL-i tekstuur on juba loodud,
+                // seome selle uue ARCore seansiga.
+                if (value != null && cameraTextureId != 0)
+                {
+                    var currentSession = value;
+                    var textureId = cameraTextureId;
+
+                    owner.QueueEvent(() =>
+                    {
+                        try
+                        {
+                            currentSession.SetCameraTextureName(textureId);
+                        }
+                        catch (Exception ex)
+                        {
+                            owner.Report($"Kaamera tekstuuri viga: {ex.Message}");
+                        }
+                    });
+                }
+            }
+        }
 
         internal string SelectedObject
         {
@@ -260,10 +289,19 @@ public sealed class ARCoreView : GLSurfaceView
 
             try
             {
-                Session.SetDisplayGeometry((int)DisplayRotation.Rotation0, width, height);
+                int rotation = 0;
+
+                var windowManager =
+                    owner.Context.GetSystemService(Context.WindowService) as IWindowManager;
+
+                if (windowManager?.DefaultDisplay != null)
+                    rotation = (int)windowManager.DefaultDisplay.Rotation;
+
+                Session?.SetDisplayGeometry(rotation, width, height);
             }
-            catch
+            catch (Exception ex)
             {
+                owner.Report($"Ekraani geomeetria viga: {ex.Message}");
             }
         }
 
@@ -280,7 +318,7 @@ public sealed class ARCoreView : GLSurfaceView
 
                 GLES20.GlClear(GLES20.GlColorBufferBit | GLES20.GlDepthBufferBit);
 
-                DrawCameraBackground();
+                DrawCameraBackground(frame);
 
                 if (pendingPlacement && camera.TrackingState == TrackingState.Tracking)
                 {
@@ -356,24 +394,35 @@ public sealed class ARCoreView : GLSurfaceView
             }
         }
 
-        private void DrawCameraBackground()
+        private void DrawCameraBackground(Google.AR.Core.Frame frame)
         {
             GLES20.GlDisable(GLES20.GlDepthTest);
-
             GLES20.GlUseProgram(cameraProgram);
 
             float[] positions =
             {
-                -1f, -1f,  1f, -1f, -1f, 1f, 1f, 1f
+                -1f, -1f,
+                1f, -1f,
+                -1f,  1f,
+                1f,  1f
             };
 
+            // Ekraani koordinaadid. ARCore teisendab need
+            // vastava kaadriga sobivateks kaamera tekstuuri koordinaatideks.
             float[] texCoords =
             {
-                0f, 1f, 1f, 1f, 0f, 0f, 1f, 0f
+                0f, 1f,
+                1f, 1f,
+                0f, 0f,
+                1f, 0f
             };
 
             using var positionBuffer = CreateFloatBuffer(positions);
-            using var texBuffer = CreateFloatBuffer(texCoords);
+            using var inputTexBuffer = CreateFloatBuffer(texCoords);
+            using var outputTexBuffer = CreateFloatBuffer(new float[8]);
+
+            frame.TransformDisplayUvCoords(inputTexBuffer, outputTexBuffer);
+            outputTexBuffer.Position(0);
 
             GLES20.GlEnableVertexAttribArray(cameraPosition);
             GLES20.GlVertexAttribPointer(
@@ -381,10 +430,13 @@ public sealed class ARCoreView : GLSurfaceView
 
             GLES20.GlEnableVertexAttribArray(cameraTexCoord);
             GLES20.GlVertexAttribPointer(
-                cameraTexCoord, 2, GLES20.GlFloat, false, 0, texBuffer);
+                cameraTexCoord, 2, GLES20.GlFloat, false, 0, outputTexBuffer);
 
             GLES20.GlActiveTexture(GLES20.GlTexture0);
-            GLES20.GlBindTexture(GLES11Ext.GlTextureExternalOes, cameraTextureId);
+            GLES20.GlBindTexture(
+                GLES11Ext.GlTextureExternalOes,
+                cameraTextureId);
+
             GLES20.GlUniform1i(cameraSampler, 0);
 
             GLES20.GlDrawArrays(GLES20.GlTriangleStrip, 0, 4);

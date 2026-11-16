@@ -16,13 +16,6 @@
                          HorizontalOptions="Fill"
                          VerticalOptions="Fill"/>
 
-            <Label Text="AR CAMERA"
-                   TextColor="White"
-                   FontSize="26"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   InputTransparent="True"/>
-
             <Label x:Name="InstructionLabel"
                    Text="Scan the floor to detect a surface"
                    TextColor="White"
