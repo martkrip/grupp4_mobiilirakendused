@@ -60,6 +60,9 @@ Viies Ülesanne - Augmenteeritud reaalsus.
 
 AR veel ei tööta. Kasutame ARCORE'i.
 
+On VIST välja töötatud AR loogika. Lisasin kaamera, mis hetkel inverted ja AR täielikult ei tööta. Tehtud ümber csproj fail, et oleks vähem konflikte ja ei esineks kordumisi.
+Tegelemine siiamaani väga ebameeldiv, palju erroreid olnud. Kui üks asi ära parandada siis tekib mitu uut errorit juurde.
+
 Kuues ülesanne - Andmete hoidmine ja ligipääs
 
 Sätette leht salvestab sätette seisud ja teksti- ja pildifailid lokaalselt app data'sse, nii, et need on olemas ka peale rakenduse sulgemist. Lehel on kolm osa: oma sätted, tekstifaili lahter ja foto lahter. Sätted salvestatakse läbi Preferences API. Teksti- ja pildifailid salvestatakse FileSystem.AppDataDirectory alla. Pilt saab unikaalse nime kuupäevaga. Foto tegemiseks kasutasime nagu varem MediaPicker'it.
