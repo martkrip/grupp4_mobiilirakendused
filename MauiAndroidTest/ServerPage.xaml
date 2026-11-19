@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAndroidTest.ServerPage"
+             Title="ServerPage">
+    
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+                <Label
+                Text="Server Page"
+                FontSize="24" />
+                <Entry x:Name="TextBox"
+                   Placeholder="Sisesta tekst"
+                   BackgroundColor="#FF09AF3B"
+                   TextColor="Black"
+                   Keyboard="Text"
+                   HorizontalOptions="Fill"/>
+                <Button Text="Submit"
+                    BackgroundColor="#FF09AF3B"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
